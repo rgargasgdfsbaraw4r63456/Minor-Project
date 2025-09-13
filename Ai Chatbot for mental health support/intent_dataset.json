@@ -1,0 +1,30 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": ["hi", "hello", "hey", "howdy", "greetings", "good morning", "what's up?"],
+      "responses": ["Hello there. How are you feeling today?", "Hi! It's good to hear from you."]
+    },
+    {
+      "tag": "feeling_bad",
+      "patterns": [
+        "I'm sad", "I feel so depressed", "I'm unhappy", "I'm miserable",
+        "I feel hopeless", "Nothing brings me joy", "I can't stop crying",
+        "The world feels grey", "What's the point of anything"      ],
+      "responses": ["I'm really sorry you're feeling that way...", "That sounds really difficult..."]
+    },
+    {
+      "tag": "feeling_anxious",
+      "patterns": [
+        "I'm so anxious", "I'm having a panic attack", "I'm stressed out",
+        "I can't stop worrying", "I feel overwhelmed", "My heart is racing",
+        "I'm nervous about everything"      ],
+      "responses": ["Stress and anxiety can be really tough to manage...", "I understand. Feeling overwhelmed is..."]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": ["bye", "goodbye", "see you later", "i'm leaving", "have a good day"],
+      "responses": ["Take care of yourself. I'm here if you need to talk again.", "Goodbye. Remember to be kind to yourself today."]
+    }
+  ]
+}

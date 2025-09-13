@@ -1,0 +1,5 @@
+ye wala command dalna chalu krne se pehele :
+pip install flask 
+fir ye dalna :
+python app.py 
+ye sab terminal mai dalna 

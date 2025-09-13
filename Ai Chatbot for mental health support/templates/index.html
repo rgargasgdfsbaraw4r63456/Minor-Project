@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Support Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>Supportive Listener</h1>
+            <p>I'm here to help. Remember, I'm not a crisis service. If you're in danger, please call 988.</p>
+        </div>
+        <div id="chat-messages" class="chat-messages">
+            <!-- Messages will be appended here by JavaScript -->
+            <div class="message bot-message">
+                <p>Hello. I'm a simple chatbot here to listen and offer resources. How are you feeling today?</p>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Type your message here...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const chatMessages = document.getElementById('chat-messages');
+        const userInput = document.getElementById('user-input');
+
+        function addMessage(message, isUser) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
+            messageDiv.innerHTML = `<p>${message}</p>`;
+            chatMessages.appendChild(messageDiv);
+            // Scroll to the bottom to show the new message
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function sendMessage() {
+            const message = userInput.value.trim();
+            if (message === '') return;
+
+            // Add user message to the chat UI immediately
+            addMessage(message, true);
+            userInput.value = ''; // Clear the input field
+
+            // Send the message to our backend (Flask)
+            fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Add the bot's response to the chat UI
+                addMessage(data.response, false);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                addMessage("Sorry, I'm having trouble connecting right now.", false);
+            });
+        }
+
+        // Allow sending a message by pressing 'Enter'
+        userInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+        <!-- ... your existing script tag ... -->
+
+    <!-- Watermark -->
+    <div class="watermark">A Project by Rohaneet Kaware </div>
+    <div class="watermark2">This Project is just a prototype with handmade datasets.</div>
+</body>
+</html>
+</body>
+</html>
